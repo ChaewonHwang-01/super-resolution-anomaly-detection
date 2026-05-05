@@ -1,0 +1,35 @@
+torch
+torchvision
+numpy
+opencv-python
+matplotlib
+PyYAML
+scikit-image
+lpips
+
+
+
+
+
+
+
+#gradio development environment
+env -> 3.10.19 gradio_demo
+아나콘다 프롬프트 같이 실행 중
+heatmap_test.py를 거의 그대로 재사용해서 “이미지 1장 업로드 → 4-panel(원본/복원/heatmap/overlay) + score 반환” 하는 Gradio 데모 만드는 과정
+(base) C:\Users\hcwon>conda create -n gradio_demo python=3.10 -y
+(base) C:\Users\hcwon>conda activate gradio_demo
+(gradio_demo) C:\Users\hcwon>pip install -U pip
+(gradio_demo) C:\Users\hcwon>pip install gradio
+(gradio_demo) C:\Users\hcwon>pip install numpy pillow matplotlib opencv-python pyyaml
+(gradio_demo) C:\Users\hcwon>pip install torch torchvision
+(gradio_demo) C:\Users\hcwon>cd C:\Users\hcwon\Desktop\project(26.3.11)
+(gradio_demo) C:\Users\hcwon\Desktop\project(26.3.11)>python app.py
+
+
+sr_test.py를 기준
+모델 클래스: SR2_AE
+입력: RGB 가능
+테스트 기준: sr_test.py
+anomaly map 기준: sr_512 - recon_512
+실제 학습 모델: sr_trainer.py 기준으로 학습은 models.sr3_ae.py의 SR2_AE 씀

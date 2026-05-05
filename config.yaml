@@ -1,0 +1,48 @@
+paths:
+  raw_dir: "./data/raw"
+  train_rgb_dir: "./data/train/normal_aug_5000/good"             # 전체 원본 이미지
+  train_y_dir: "./data/new/train/good"
+  train_dir: "./data/train/normal_aug_5000_zipper"
+  test_dir : "./zipper/test"           # 학습용 정상 이미지
+  test_normal_dir: "./data/test/normal"   # 테스트용 정상 이미지
+  test_abnormal_dir: "./data/test/abnormal" # 테스트용 이상 이미지
+  results_dir: "./results"
+
+model:
+  in_channels: 3
+  scale: 2
+  srcnn_fn: 32
+  srcnn_dfn: 64
+  vae_base_channels: 64
+  vae_max_channels: 256
+  vae_latent_channels: 256
+  ae_base_channels: 64
+  ae_max_channels: 256
+  srcnn_pretrained_path: "./weights/train_srcnn.pth"
+  freeze_srcnn: true
+
+
+train:
+  img_size: 256
+  batch_size: 32
+  num_workers: 4
+  epochs: 100
+  lr: 0.001
+  scheduler: cosine
+  train_split_ratio: 0.95      # raw 중 몇 %를 train으로 쓸지
+  recon_type: "mse"
+  kld_weight: 0.0001
+  grad_clip: 1.0
+  save_mode: "vae_only" #"ae_only"
+
+anomaly:
+  blur_prob: 0.5
+  text_prob: 0.3
+  rotate_prob: 0.3
+  bright_prob: 0.3
+  mask_prob: 0.2
+
+test:
+  num_samples: 3              # 샘플 몇 개를 heatmap + MSE/SSIM로 볼지
+  checkpoint_path: "./results/checkpoints/sr2_vae_only_zipper.pth"         # 비워두면 최신 weight 사용
+
